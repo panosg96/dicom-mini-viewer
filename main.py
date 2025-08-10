@@ -124,18 +124,6 @@ with cont3:
 
 
 with cont5:
-    # optional simple heuristic highlight: basic threshold + contour
-    if st.checkbox('Run simple highlight (threshold/contour)'):
-        import cv2
-        arr = np.array(pil_img)
-        # simple adaptive threshold
-        gray = arr if arr.ndim == 2 else cv2.cvtColor(arr, cv2.COLOR_BGR2GRAY)
-        thr = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11,2)
-        # find contours
-        contours, _ = cv2.findContours(thr, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        vis = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
-        cv2.drawContours(vis, contours, -1, (0, 255, 0), 1)
-        st.image(vis, caption='Highlighted (heuristic)', use_container_width=True)
 
     # Optionally list the DICOM tags of current slice
     if st.checkbox('Show DICOM tags (current slice)'):
