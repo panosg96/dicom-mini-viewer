@@ -90,18 +90,6 @@ with cont1:
     st.write('### Series Slices')
     idx = st.slider('Slice', min_value=0, max_value=max(0, len(files_in_series)-1), value=1)
     file_to_show = files_in_series[int(idx)]
-    st.write(file_to_show)
-    if st.button('Export selected slice metadata to csv'):
-        ds = read_dicom(file_to_show)
-        row = {
-            'study_id': getattr(ds, 'StudyInstanceUID', ''),
-            'series_id': getattr(ds, 'SeriesInstanceUID', ''),
-            'file_name': os.path.basename(file_to_show),
-            'sop_instance_uid': getattr(ds, 'SOPInstanceUID', '')
-        }
-        out_path = os.path.join(tmpdir, 'selected_slices.csv')
-        export_selected_slices_csv([row], out_path)
-        st.success(f'csv exported to {out_path}')
 
 with cont2:
     st.write('### Image Viewer')
