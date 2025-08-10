@@ -8,7 +8,6 @@ from PIL import Image
 import io
 import pandas as pd
 
-
 st.set_page_config(layout='wide', page_title='PACS Mini Viewer')
 
 st.title('PACS Mini Viewer')
@@ -25,6 +24,7 @@ if 'tmpdir' not in st.session_state:
 
 tmpdir = st.session_state['tmpdir'].name
 
+
 filepaths = []
 if uploaded_files:
     for uf in uploaded_files:
@@ -39,6 +39,7 @@ if uploaded_files:
                     zf.extractall(tmpdir)
             except Exception as e:
                 st.sidebar.error(f'Error extracting zip: {e}')
+
 
 # Option to load from local folder path (for dev)
 local_folder = st.sidebar.text_input('Or provide local folder path (dev)', '')
@@ -81,11 +82,12 @@ cont1 = st.container()
 cont2 = st.container()
 cont3 = st.container(horizontal=True, horizontal_alignment='center')
 cont4 = st.container(horizontal=True, horizontal_alignment='center')
+cont5 = st.container(horizontal=True, horizontal_alignment='center')
 
 
 with cont1:
-    st.header('Series Files')
-    idx = st.number_input('Slice index', min_value=0, max_value=max(0, len(files_in_series)-1), value=0, step=1)
+    st.header('Series Slices')
+    idx = st.slider('Slice', min_value=0, max_value=max(0, len(files_in_series)-1), value=1)
     file_to_show = files_in_series[int(idx)]
     st.write(file_to_show)
     if st.button('Export selected slice metadata to csv'):
@@ -112,14 +114,15 @@ with cont2:
         ww = 256
     wc = st.slider('Window Center', min_value=0, max_value=1024, value=200)
     ww = st.slider('Window Width', min_value=1, max_value=2048, value=400)
-    
+  
     
 with cont3:    
     out_img = apply_window(img, center=wc, width=ww)
     pil_img = Image.fromarray(out_img)
     st.image(pil_img, caption=f'Slice {idx}', use_container_width=False, width=400)
 
-with cont4:    
+
+with cont5:
     # optional simple heuristic highlight: basic threshold + contour
     if st.checkbox('Run simple highlight (threshold/contour)'):
         import cv2
