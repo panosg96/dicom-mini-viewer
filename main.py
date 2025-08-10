@@ -11,8 +11,6 @@ import pandas as pd
 
 st.set_page_config(layout='wide', page_title='PACS Mini Viewer')
 
-
-
 st.title('PACS Mini Viewer')
 
 st.markdown('Lightweight DICOM viewer with simple window/level controls and csv export. Local-only demo')
@@ -82,6 +80,7 @@ for f in files_in_series[:50]:
 cont1 = st.container()
 cont2 = st.container()
 cont3 = st.container(horizontal=True, horizontal_alignment='center')
+cont4 = st.container(horizontal=True, horizontal_alignment='center')
 
 
 with cont1:
@@ -120,6 +119,7 @@ with cont3:
     pil_img = Image.fromarray(out_img)
     st.image(pil_img, caption=f'Slice {idx}', use_container_width=False, width=400)
 
+with cont4:    
     # optional simple heuristic highlight: basic threshold + contour
     if st.checkbox('Run simple highlight (threshold/contour)'):
         import cv2
