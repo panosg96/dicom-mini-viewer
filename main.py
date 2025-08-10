@@ -83,8 +83,6 @@ cont1 = st.container()
 cont2 = st.container()
 cont3 = st.container(horizontal=True, horizontal_alignment='center')
 cont4 = st.container(horizontal=True, horizontal_alignment='center')
-cont5 = st.container(horizontal=True, horizontal_alignment='center')
-
 
 with cont1:
     st.write('### Series Slices')
@@ -111,7 +109,7 @@ with cont3:
     st.image(pil_img, caption=f'Slice {idx}', use_container_width=False, width=400)
 
 
-with cont5:
+with cont4:
 
     # Optionally list the DICOM tags of current slice
     if st.checkbox('Show DICOM tags (current slice)'):
