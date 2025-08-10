@@ -8,6 +8,7 @@ from PIL import Image
 import io
 import pandas as pd
 
+
 st.set_page_config(layout='wide', page_title='PACS Mini Viewer')
 
 st.title('PACS Mini Viewer')
@@ -86,7 +87,7 @@ cont5 = st.container(horizontal=True, horizontal_alignment='center')
 
 
 with cont1:
-    st.header('Series Slices')
+    st.write('### Series Slices')
     idx = st.slider('Slice', min_value=0, max_value=max(0, len(files_in_series)-1), value=1)
     file_to_show = files_in_series[int(idx)]
     st.write(file_to_show)
@@ -103,7 +104,7 @@ with cont1:
         st.success(f'csv exported to {out_path}')
 
 with cont2:
-    st.header('Image Viewer')
+    st.write('### Image Viewer')
     ds = read_dicom(file_to_show)
     img, wc, ww = dataset_to_numpy(ds)
 
