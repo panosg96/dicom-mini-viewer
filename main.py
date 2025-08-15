@@ -86,8 +86,15 @@ cont4 = st.container(horizontal=True, horizontal_alignment='center')
 
 with cont1:
     st.write('### Series Slices')
-    idx = st.slider('Slice', min_value=0, max_value=max(0, len(files_in_series)-1), value=1)
-    file_to_show = files_in_series[int(idx)]
+    num_slices = len(files_in_series
+                     )
+    if files_in_series == 1:
+        idx = 0
+        file_to_show = files_in_series[0]
+    else:
+        idx = st.slider('Slice', min_value=0, max_value=max(0, num_slices), value=0)
+        file_to_show = files_in_series[int(idx)]
+    
 
 with cont2:
     st.write('### Image Viewer')
