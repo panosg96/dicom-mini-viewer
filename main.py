@@ -11,9 +11,9 @@ import pandas as pd
 
 st.set_page_config(layout='wide', page_title='PACS Mini Viewer')
 
-st.title('PACS Mini Viewer')
+st.header('PACS Mini Viewer', divider="blue")
 
-st.markdown('Lightweight DICOM viewer with simple window/level controls and csv export. Local-only demo')
+st.markdown('Lightweight DICOM viewer with simple window/level controls. Local-only demo')
 
 # Sidebar: upload
 st.sidebar.header('Data')
@@ -86,14 +86,28 @@ cont4 = st.container(horizontal=True, horizontal_alignment='center')
 
 with cont1:
     st.write('### Series Slices')
-    num_slices = len(files_in_series
-                     )
-    if files_in_series == 1:
+
+    num_slices = len(files_in_series)
+
+    if num_slices == 0:
+        st.error("No image slices found in this series.")
+        st.stop()
+
+    elif num_slices == 1:
+        st.write("Single slice available.")
         idx = 0
         file_to_show = files_in_series[0]
+
     else:
-        idx = st.slider('Slice', min_value=0, max_value=max(0, num_slices), value=0)
+        idx = st.slider(
+            'Slice',
+            min_value=0,
+            max_value=num_slices - 1,
+            value=0
+        )
         file_to_show = files_in_series[int(idx)]
+
+
     
 
 with cont2:
@@ -113,7 +127,7 @@ with cont2:
 with cont3:    
     out_img = apply_window(img, center=wc, width=ww)
     pil_img = Image.fromarray(out_img)
-    st.image(pil_img, caption=f'Slice {idx}', use_container_width=False, width=400)
+    st.image(pil_img, caption=f'Slice {idx}', use_container_width=False, width=250)
 
 
 with cont4:
