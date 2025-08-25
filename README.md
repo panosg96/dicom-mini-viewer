@@ -7,4 +7,4 @@
 The programming language that was used is Python, along with modules like streamlit and pydicom among others.
 The program runs locally in a web browser.
 
-![image](~/Users/panagiotisgoulas/Desktop/GitHub/Repos/dicom-mini-viewer/img.png)
+![alt text](img.png "Preview")
