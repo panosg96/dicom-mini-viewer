@@ -7,4 +7,4 @@
 The programming language that was used is Python, along with modules like streamlit and pydicom among others.
 The program runs locally in a web browser.
 
-![alt text](Images/img.png "Preview")
+![title](Images/img.png "Preview")
